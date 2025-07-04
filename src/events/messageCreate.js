@@ -14,14 +14,14 @@ export default {
       console.log(`💕 syxver dijo algo, respondí con Holamiamor`);
       return;
     }
-
+/**
     if (message.author.username.toLowerCase() !== 'elvisgmz_' && 
         message.member?.displayName.toLowerCase() !== 'elvisgmz_') {
       await message.reply('Apoco si mi PndJo 🗿');
       console.log(`💕 Alguien dijo algo, respondí con Apoco si mi PndJo`);
       return;
     }
-    
+    */
     // Verificar si el bot fue mencionado
     const botMentioned = message.mentions.users.has(message.client.user.id);
     
