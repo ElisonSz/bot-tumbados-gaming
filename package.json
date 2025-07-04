@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "tumbados": "node scripts/tumbados.js",
+    "deploy": "node src/deploy-commands.js",
+    "render-check": "node scripts/deploy-render.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": ["discord", "bot", "gaming"],
   "author": "Tumbados Gaming",

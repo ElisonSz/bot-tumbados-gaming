@@ -120,8 +120,15 @@ bot-tumbados-gaming/
 │   │   ├── guildMemberAdd.js
 │   │   └── messageCreate.js
 │   ├── index.js           # Archivo principal
+│   ├── health-check.js    # Health check para Render
 │   └── deploy-commands.js # Script para registrar comandos
+├── scripts/
+│   ├── tumbados.js        # Script personalizado de inicio
+│   └── deploy-render.js   # Script de verificación para Render
 ├── package.json
+├── render.yaml            # Configuración de Render.io
+├── Procfile               # Comando de inicio para Render
+├── .dockerignore          # Archivos a ignorar en build
 ├── env.example
 └── README.md
 ```
@@ -168,13 +175,79 @@ bot-tumbados-gaming/
 
 - `npm start` - Iniciar el bot en producción
 - `npm run dev` - Iniciar el bot en modo desarrollo con nodemon
-- `node src/deploy-commands.js` - Registrar comandos slash
+- **`npm run tumbados`** - Script personalizado con verificaciones y banner 🎮
+- `npm run deploy` - Registrar comandos slash
+- `npm run render-check` - Verificar preparación para Render.io
+- `node src/deploy-commands.js` - Registrar comandos slash (alternativo)
+
+### 🎮 Script Tumbados
+
+El script `npm run tumbados` incluye:
+
+- **Banner personalizado** con el logo de Tumbados Gaming
+- **Verificaciones automáticas** de archivos y dependencias
+- **Información del sistema** (Node.js, plataforma, etc.)
+- **Manejo de errores** mejorado
+- **Colores en consola** para mejor experiencia visual
+- **Cierre limpio** del bot con Ctrl+C
+
+**Uso:**
+```bash
+npm run tumbados
+```
+
+## 🚀 Despliegue en Render.io
+
+### Preparación
+
+1. **Verificar preparación:**
+   ```bash
+   npm run render-check
+   ```
+
+2. **Asegúrate de tener estos archivos:**
+   - `render.yaml` - Configuración de Render
+   - `Procfile` - Comando de inicio
+   - `src/health-check.js` - Health check para Render
+
+### Pasos para Desplegar
+
+1. **Crear cuenta en Render.io**
+   - Ve a [render.com](https://render.com)
+   - Crea una cuenta gratuita
+
+2. **Conectar repositorio**
+   - Conecta tu repositorio de GitHub
+   - Selecciona el repositorio del bot
+
+3. **Crear Web Service**
+   - Tipo: Web Service
+   - Plan: Free
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+
+4. **Configurar variables de entorno**
+   - `DISCORD_TOKEN`: Tu token del bot de Discord
+   - `CLIENT_ID`: ID de tu aplicación de Discord
+   - `GUILD_ID`: ID de tu servidor (opcional)
+
+5. **Deploy**
+   - Haz clic en "Create Web Service"
+   - Espera a que termine el build
+
+### Características del Despliegue
+
+- ✅ **Health Check automático** - Render verifica que el bot esté funcionando
+- ✅ **Auto-deploy** - Se actualiza automáticamente con cada push
+- ✅ **Logs en tiempo real** - Puedes ver los logs del bot
+- ✅ **Escalabilidad** - Fácil de escalar si necesitas más recursos
 
 ## 🔒 Seguridad
 
 - **Nunca compartas tu token del bot**
 - **Mantén el archivo `.env` en tu `.gitignore**
 - **Usa permisos mínimos necesarios para el bot**
+- **Las variables de entorno en Render están encriptadas**
 
 ## 🤝 Contribuir
 
