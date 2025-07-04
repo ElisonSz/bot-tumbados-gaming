@@ -3,47 +3,53 @@ import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 export default {
   data: new SlashCommandBuilder()
     .setName('jona')
-    .setDescription('Un mensaje especial para Jona ❤️'),
+    .setDescription('Un mensaje especial ❤️'),
   
   async execute(interaction) {
-    const user = interaction.user;
+    // Agregar emojis de corazón
+    const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞'];
+    const randomHeart = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
     
-    // Crear embed con el mensaje especial
+    // Array de imágenes románticas (URLs de imágenes libres de derechos)
+    const romanticImages = [
+      // Imágenes románticas de Unsplash
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1516589091380-5d8e21be98d5?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1516589091380-5d8e21be98d5?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=300&fit=crop',
+      // GIFs románticos de Giphy (URLs directas)
+      'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+      'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif',
+      'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+      'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif',
+      // Más imágenes románticas
+      'https://images.unsplash.com/photo-1516589091380-5d8e21be98d5?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=300&fit=crop'
+    ];
+    
+    // Seleccionar imagen aleatoria
+    const randomImage = romanticImages[Math.floor(Math.random() * romanticImages.length)];
+    
+    // Crear embed con la imagen
     const embed = new EmbedBuilder()
-      .setColor('#ff69b4') // Color rosa para el amor
-      .setTitle('💕 Mensaje Especial 💕')
-      .setDescription(`**Holamiamor <3**`)
-      .addFields(
-        { 
-          name: '👤 De', 
-          value: user.tag, 
-          inline: true 
-        },
-        { 
-          name: '💝 Para', 
-          value: 'Jona', 
-          inline: true 
-        },
-        { 
-          name: '⏰ Enviado', 
-          value: `<t:${Math.floor(Date.now() / 1000)}:t>`, 
-          inline: true 
-        }
-      )
-      .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+      .setColor('#ff69b4') // Color rosa romántico
+      .setTitle('💕 Mensaje de Amor 💕')
+      .setDescription(`${randomHeart} **Holamiamor <3** ${randomHeart}`)
+      .setImage(randomImage)
       .setFooter({ 
         text: 'Con mucho amor desde Tumbados Gaming Bot 💖',
         iconURL: interaction.client.user.displayAvatarURL({ dynamic: true })
       })
       .setTimestamp();
     
-    // Agregar emojis de corazón
-    const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞'];
-    const randomHeart = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-    
     await interaction.reply({ 
-      content: `${randomHeart} **Holamiamor <3** ${randomHeart}`,
-      embeds: [embed] 
+      embeds: [embed],
+      ephemeral: false
     });
   },
 }; 

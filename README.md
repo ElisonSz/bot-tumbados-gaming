@@ -19,7 +19,7 @@ Un bot de Discord completo desarrollado con Node.js y discord.js para el servido
 - `/userinfo [usuario]` - Información de un usuario
 - `/clear [cantidad]` - Eliminar mensajes del canal (requiere permisos)
 - `/saludo` - Te saluda de manera personalizada
-- `/jona` - Un mensaje especial para Jona ❤️
+- `/jona` - Un mensaje especial ❤️
 
 ## 🎯 Funcionalidades Especiales
 
