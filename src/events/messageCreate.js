@@ -18,8 +18,7 @@ export default {
     const minWordsLength = 10;
     const minWordsLengthIsMoreThanLimit = message?.content?.split(' ').length > minWordsLength;
 
-    if (message.author.username.toLowerCase() !== 'elvisgmz_' &&
-      message.member?.displayName.toLowerCase() !== 'elvisgmz_' && minWordsLengthIsMoreThanLimit) {
+    if (minWordsLengthIsMoreThanLimit) {
       await message.reply({
         content: 'Apoco si mi PndJo 🗿',
         files: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iwwL5jEA8TWbFmoBui0qRVooG2Bb6gig-w&s"]
