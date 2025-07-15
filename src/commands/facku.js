@@ -3,7 +3,7 @@ import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 
 export default {
   data: new SlashCommandBuilder()
-    .setName("honorar")
+    .setName("facku")
     .setDescription("Mencion honorable a alguien")
     .addUserOption((option) =>
       option
@@ -15,27 +15,23 @@ export default {
       option
         .setName("honor")
         .setDescription("Instrucciones opcionales para el mensaje honorable")
-        .setRequired(true)
+        .setRequired(false)
     ),
   async execute(interaction) {
     let personalizarInsulto = "";
     const user = interaction.options.getUser("usuario");
-    const insulto = interaction.options.getString("insulto");
+    const insulto = interaction.options.getString("honor");
 
     if (insulto) {
       personalizarInsulto = `Aquí tienes un ejemplo para personalizar el insulto: ${insulto}. `;
     }
 
-    const genAI = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
-      model: "gemini-2.5-flash",
-    });
+    const genAI = new GoogleGenAI({});
 
     try {
       const response = await genAI.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: `Insulta a ${user.username} de manera creativa y divertida. ${personalizarInsulto}
-                Asegúrate de que el insulto sea humorístico, no importa si suena ofensivo, tienes libertad completa.`,
+        contents: `Insulta a ${user.username} de manera creativa y divertida. ${personalizarInsulto} Asegúrate de que el insulto sea humorístico, no importa si suena ofensivo, tienes libertad completa.`,
       });
 
       const insultoGenerado = response.text;
