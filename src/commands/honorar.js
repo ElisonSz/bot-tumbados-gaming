@@ -3,18 +3,18 @@ import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 
 export default {
   data: new SlashCommandBuilder()
-    .setName("insultar")
-    .setDescription("Insulta a alguien")
+    .setName("honorar")
+    .setDescription("Mencion honorable a alguien")
     .addUserOption((option) =>
       option
         .setName("usuario")
-        .setDescription("El usuario a insultar")
+        .setDescription("El usuario a honorar")
         .setRequired(true)
     )
     .addStringOption((option) =>
       option
-        .setName("insulto")
-        .setDescription("Instrucciones opcionales para el insulto")
+        .setName("honor")
+        .setDescription("Instrucciones opcionales para el mensaje honorable")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -42,7 +42,7 @@ export default {
 
       const embed = new EmbedBuilder()
         .setColor("#FF0000")
-        .setTitle(`Insulto para ${user.username}`)
+        .setTitle(`Mensaje honorable para ${user.username}`)
         .setDescription(insultoGenerado)
         .setFooter({
           text: `A pedido de ${interaction.user.tag} :3`,
@@ -52,10 +52,10 @@ export default {
 
       await interaction.reply({ embeds: [embed] });
     } catch (error) {
-      console.error("Error al generar el insulto:", error);
+      console.error("Error al generar el honorable:", error);
       await interaction.reply({
         content:
-          "Hubo un error al generar el insulto. Inténtalo de nuevo más tarde.",
+          "Hubo un error al generar el mensaje honorable. Inténtalo de nuevo más tarde.",
         ephemeral: true,
       });
     }
