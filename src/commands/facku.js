@@ -1,5 +1,20 @@
+import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+
+if (!process.env.GEMINI_API_KEY) {
+  throw new Error(
+    "GEMINI_API_KEY no está configurada. Verifica las variables de entorno."
+  );
+}
+
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 export default {
   data: new SlashCommandBuilder()
@@ -10,28 +25,14 @@ export default {
         .setName("usuario")
         .setDescription("El usuario a honorar")
         .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("honor")
-        .setDescription("Instrucciones opcionales para el mensaje honorable")
-        .setRequired(false)
     ),
   async execute(interaction) {
-    let personalizarInsulto = "";
     const user = interaction.options.getUser("usuario");
-    const insulto = interaction.options.getString("honor");
-
-    if (insulto) {
-      personalizarInsulto = `Aquí tienes un ejemplo para personalizar el insulto: ${insulto}. `;
-    }
-
-    const genAI = new GoogleGenAI({});
 
     try {
-      const response = await genAI.models.generateContent({
+      const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: `Insulta a ${user.username} de manera creativa y divertida. ${personalizarInsulto} Asegúrate de que el insulto sea humorístico, no importa si suena ofensivo, tienes libertad completa.`,
+        contents: `Insulta a ${user.username} de manera creativa y divertida. Asegúrate de que el insulto sea humorístico, no importa si suena ofensivo, tienes libertad completa.`,
       });
 
       const insultoGenerado = response.text;

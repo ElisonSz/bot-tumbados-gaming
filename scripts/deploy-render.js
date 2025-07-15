@@ -63,7 +63,7 @@ console.log('');
 // Verificar variables de entorno
 print('blue', '🔧 Verificando variables de entorno...');
 const envExample = fs.readFileSync('env.example', 'utf8');
-const requiredVars = ['DISCORD_TOKEN', 'CLIENT_ID'];
+const requiredVars = ['DISCORD_TOKEN', 'CLIENT_ID', 'GEMINI_API_KEY'];
 
 for (const varName of requiredVars) {
   if (envExample.includes(varName)) {
@@ -86,6 +86,7 @@ print('white', '5. Configura las variables de entorno:');
 print('yellow', '   - DISCORD_TOKEN: Tu token del bot de Discord');
 print('yellow', '   - CLIENT_ID: ID de tu aplicación de Discord');
 print('yellow', '   - GUILD_ID: ID de tu servidor (opcional)');
+print('yellow', '   - GEMINI_API_KEY: Tu clave de API de Gemini');
 print('white', '6. Deploy!');
 console.log('');
 
